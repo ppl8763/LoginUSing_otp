@@ -1,66 +1,156 @@
-<!-- otp.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Enter OTP</title>
+  <title>Responsive Calculator</title>
   <style>
+    * {
+      margin: 0;
+      box-sizing: border-box;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
     body {
+      background-color: rgb(255, 103, 103);
+    }
+
+    .box {
+      min-height: 100vh;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      height: 100vh;
-      background-color: #111;
+      align-items: center;
+    }
+
+    .txtarea {
+      background: rgba(255, 255, 255, 0.2);
+      width: 90vw;
+      max-width: 400px;
+      padding: 20px;
+      border: 3px solid #8888;
+      backdrop-filter: blur(15px);
+      border-radius: 15px;
+    }
+
+    .input-field {
+      width: 100%;
+      height: 60px;
+      border-radius: 5px;
+      background-color: transparent;
+      border: 2px solid #fff;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .btn1, .btn2, .btn3, .btn4, .btn5 {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    input[type="button"] {
+      height: 60px;
+      width: 60px;
+      flex: 1 1 20%;
+      margin: 8px;
+      border-radius: 50%;
+      font-weight: bold;
+      font-size: 24px;
+      background-color: #fff;
+      border: none;
+      box-shadow: rgba(240, 46, 170, 0.3) -5px 5px, rgba(240, 46, 170, 0.2) -10px 10px;
+      transition: 0.2s ease-in-out;
+    }
+
+    input[type="button"]:hover {
+      background-color: rgba(240, 46, 170, 0.6);
+      transform: scale(1.1);
       color: white;
-      font-family: sans-serif;
     }
-    input {
-      padding: 10px;
-      font-size: 1.2rem;
-      border-radius: 10px;
-      margin: 10px;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 1rem;
-      border-radius: 20px;
-      cursor: pointer;
+
+    /* Responsive Tweaks */
+    @media screen and (max-width: 480px) {
+      .txtarea {
+        width: 95vw;
+        padding: 15px;
+      }
+
+      .input-field {
+        font-size: 22px;
+        height: 50px;
+      }
+
+      input[type="button"] {
+        height: 50px;
+        width: 50px;
+        font-size: 18px;
+        margin: 6px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>OTP Verification</h1>
-  <p>We have sent an OTP to your Gmail.</p>
-  <input type="text" id="otp" placeholder="Enter OTP" />
-  <button onclick="verifyOTP()">Verify</button>
-  <p id="message"></p>
+  <div class="box">
+    <form>
+      <div class="txtarea">
+        <input type="text" class="input-field" name="display" id="display" readonly />
+
+        <div class="btn1">
+          <input type="button" value="AC" style="background-color: rgb(255, 0, 0); font-size: 20px;" onclick="display.value = ''"/>
+          <input type="button" value="DEL" style="background-color: rgb(255, 0, 0); font-size: 20px;" onclick="backspace()" />
+          <input type="button" value="%" onclick="display.value += '%'" />
+          <input type="button" value="/" style="background-color: rgb(255, 191, 0);" onclick="display.value += '/'" />
+        </div>
+
+        <div class="btn2">
+          <input type="button" value="7" onclick="display.value += '7'" />
+          <input type="button" value="8" onclick="display.value += '8'" />
+          <input type="button" value="9" onclick="display.value += '9'" />
+          <input type="button" value="*" style="background-color: rgb(255, 191, 0);" onclick="display.value += '*'" />
+        </div>
+
+        <div class="btn3">
+          <input type="button" value="4" onclick="display.value += '4'" />
+          <input type="button" value="5" onclick="display.value += '5'" />
+          <input type="button" value="6" onclick="display.value += '6'" />
+          <input type="button" value="-" style="background-color: rgb(255, 191, 0);" onclick="display.value += '-'" />
+        </div>
+
+        <div class="btn4">
+          <input type="button" value="1" onclick="display.value += '1'" />
+          <input type="button" value="2" onclick="display.value += '2'" />
+          <input type="button" value="3" onclick="display.value += '3'" />
+          <input type="button" value="+" style="background-color: rgb(255, 191, 0);" onclick="display.value += '+'" />
+        </div>
+
+        <div class="btn5">
+          <input type="button" value="0" onclick="display.value += '0'" />
+          <input type="button" value="00" onclick="display.value += '00'" />
+          <input type="button" value="." onclick="display.value += '.'" />
+          <input type="button" value="=" style="background-color: rgb(255, 191, 0);" onclick="result()" />
+        </div>
+      </div>
+    </form>
+  </div>
 
   <script>
-    function verifyOTP() {
-        const otp = document.getElementById("otp").value;
-    
-        fetch("http://localhost:3000/verify-otp", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ otp: otp })
-        })
-        .then(res => res.json())
-        .then(data => {
-            const msg = document.getElementById("message");
-            if (data.success) {
-                msg.textContent = "OTP Verified! ✅";
-                msg.style.color = "green";
-                // Optionally redirect to a protected page
-                // window.location.href = "dashboard.html";
-            } else {
-                msg.textContent = "Invalid OTP ❌";
-                msg.style.color = "red";
-            }
-        });
+    function backspace() {
+      let display = document.getElementById("display");
+      display.value = display.value.slice(0, -1);
     }
-    </script>
-    
+
+    function result() {
+      try {
+        let display = document.getElementById("display");
+        display.value = eval(display.value);
+      } catch {
+        alert("Invalid expression");
+        display.value = '';
+      }
+    }
+  </script>
 </body>
 </html>
