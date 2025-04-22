@@ -7,94 +7,128 @@
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
     body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-image: url('spider-man-dark-5120x2880-18796.jpg');
-            background-position: center;
-            background-size: cover;
-            color: #fff;
-            transition: background-image 1s ease-in-out, backdrop-filter 0.5s ease-in-out;
-        }
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-image: url('spider-man-dark-5120x2880-18796.jpg');
+      background-position: center;
+      background-size: cover;
+      color: #fff;
+      transition: background-image 1s ease-in-out, backdrop-filter 0.5s ease-in-out;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+    }
 
-        /* Fade-in animation for the container */
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 60vh;
-            width: 30%;
-            max-width: 400px;
-            background-color: transparent;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border-radius: 10px;
-            border: 2px solid #ffffff33;
-            color: #fff;
-            backdrop-filter: blur(10px);
-            box-shadow: 0px 0px 3px 3px #ffffff33;
-            flex-direction: column;
-            padding: 20px;
-            transition: background 0.5s ease, transform 0.5s ease;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-        }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
 
-        /* Smooth input field effect */
-        .container input {
-            margin: 10px;
-            height: 8%;
-            width: 80%;
-            border-radius: 40px;
-            padding: 10px;
-            background-color: transparent;
-            border: 2px solid #ffffff33;
-            color: #fff;
-            font-size: 1rem;
-            transition: all 0.3s ease-in-out;
-        }
-        
-        .container input:focus {
-            border-color: #ce2e90;
-            box-shadow: 0 0 8px #ce2e90;
-        }
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      box-shadow: 0px 0px 3px 3px #ffffff33;
+      border-radius: 10px;
+      border: 2px solid #ffffff33;
+      color: #fff;
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      width: 80%;
+      max-width: 400px;
+      animation: fadeIn 1s forwards;
+    }
 
-        /* Button effects */
-        button {
-            margin-top: 20px;
-            background-color: transparent;
-            color: #d6cbcb;
-            border: 2px solid #d6cbcb;
-            padding: 0.5rem 2rem;
-            font-size: 1.4rem;
-            font-weight: bolder;
-            cursor: pointer;
-            border-radius: 4rem;
-            transition: all 0.3s ease-in-out;
-        }
+    .container input {
+      margin: 10px 0;
+      height: 45px;
+      width: 100%;
+      border-radius: 40px;
+      padding: 10px 20px;
+      background-color: transparent;
+      border: 2px solid #ffffff33;
+      color: #fff;
+      font-size: 1rem;
+      transition: all 0.3s ease-in-out;
+    }
 
-        button:hover {
-            background-color: #d6cbcb;
-            color: black;
-            box-shadow: 0 0 25px #d6cbcb;
-            transform: scale(1.1);
-        }
+    .container input:focus {
+      border-color: #ce2e90;
+      box-shadow: 0 0 8px #ce2e90;
+    }
 
-        /* Smooth text transition */
-        p {
-            transition: color 0.5s ease-in-out;
-        }
+    button {
+      margin-top: 15px;
+      background-color: transparent;
+      color: #d6cbcb;
+      border: 2px solid #d6cbcb;
+      padding: 0.5rem 2rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4rem;
+      transition: all 0.3s ease-in-out;
+    }
 
-        /* Keyframe Animation for Fade-in Effect */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        #otpInput{
-            width: 70%;
-            margin-left: -30px;
-        }
+    button:hover {
+      background-color: #d6cbcb;
+      color: black;
+      box-shadow: 0 0 25px #d6cbcb;
+      transform: scale(1.05);
+    }
+
+    p {
+      margin-top: 1rem;
+      transition: color 0.5s ease-in-out;
+    }
+
+    #otpInput {
+      width: 100%;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .container {
+        width: 90%;
+      }
+
+      button {
+        font-size: 1rem;
+        padding: 0.5rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .container {
+        padding: 15px;
+      }
+
+      .container input {
+        font-size: 0.9rem;
+      }
+
+      button {
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -109,18 +143,20 @@
 
   <script>
     emailjs.init("mVHtYLVlKWqa_hN6u"); 
-    const a =document.getElementById("p");
+    const a = document.getElementById("p");
     let generatedOTP = "";
 
     function generateOTP() {
-      return Math.floor(10000000 + Math.random() * 900000).toString(); 
+      return Math.floor(100000 + Math.random() * 900000).toString(); 
     }
 
     function sendOTP() {
       const email = document.getElementById("email").value.trim();
+      const st = document.getElementById("status");
+
       if (!email) {
-        const st =document.getElementById("status");
         st.textContent = "Please enter email.";
+        st.style.color = "red";
         return;
       }
 
@@ -134,32 +170,33 @@
       emailjs
         .send("service_0iy7328", "template_i2jd8c1", templateParams)
         .then(() => {
-          document.getElementById("status").textContent = "OTP Sent!";
-          document.getElementById("status").style.color = "green";
+          st.textContent = "OTP Sent!";
+          st.style.color = "lightgreen";
         })
         .catch((error) => {
           console.error("EmailJS Error:", error);
-          document.getElementById("status").textContent = "Failed to send OTP.";
-          document.getElementById("status").style.color = "red";
+          st.textContent = "Failed to send OTP.";
+          st.style.color = "red";
         });
     }
 
     function verifyOTP() {
-      
       const userOTP = document.getElementById("otpInput").value.trim();
-      if(!userOTP){
-        const st =document.getElementById("status");
+      const st = document.getElementById("status");
+
+      if (!userOTP) {
         st.textContent = "Please enter the OTP.";
-        st.style.color="red";
+        st.style.color = "red";
         return;
       }
+
       if (userOTP === generatedOTP) {
-        document.getElementById("status").textContent = "Login Successful!";
-        document.getElementById("status").style.color = "green";
-        window.location.href="otp.html";
+        st.textContent = "Login Successful!";
+        st.style.color = "lightgreen";
+        window.location.href = "otp.html";
       } else {
-        document.getElementById("status").textContent = "Invalid OTP!";
-        document.getElementById("status").style.color = "red";
+        st.textContent = "Invalid OTP!";
+        st.style.color = "red";
       }
     }
   </script>
